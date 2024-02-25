@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  miner-1:
+    container_name: miner-1
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: [ "npm", "run", "start-miner" ]
+    networks:
+      - blockchain-network
+  miner-2:
+    container_name: miner-2
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: [ "npm", "run", "start-miner" ]
+    networks:
+      - blockchain-network
+  miner-3:
+    container_name: miner-3
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: [ "npm", "run", "start-miner" ]
+    networks:
+      - blockchain-network
+  miner-4:
+    container_name: miner-4
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: [ "npm", "run", "start-miner" ]
+    networks:
+      - blockchain-network
+  actor-1:
+    container_name: actor-1
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: [ "npm", "run", "start-actor" ]
+    networks:
+      - blockchain-network
+    depends_on:
+      - miner-1
+      - miner-2
+      - miner-3
+      - miner-4
+networks:
+  blockchain-network:
+    name: blockchain-network
+    driver: bridge
